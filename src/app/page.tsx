@@ -4,7 +4,7 @@ const MainPage = () => {
   return (
     <main>
       <HeroSection />
-      <MostPopular />
+      {/* <MostPopular /> */}
       <Testimonials />
     </main>
   );

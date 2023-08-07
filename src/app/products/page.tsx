@@ -5,7 +5,7 @@ const Products = () => {
   return (
     <>
       <h1 className="secondary_header">Products page</h1>
-      <ProductsList />
+      {/* <ProductsList /> */}
     </>
   );
 };
