@@ -27,7 +27,7 @@ export const connectToDB = async () => {
 };
 
 export const getProducts = async () => {
-  const res = await fetch(`/api/products`);
+  const res = await fetch(`${process.env.URL}/api/products`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
@@ -37,7 +37,7 @@ export const getProducts = async () => {
 };
 
 export const getProduct = async (product: string) => {
-  const res = await fetch(`/api/products/${product}`);
+  const res = await fetch(`${process.env.URL}/api/products/${product}`);
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
