@@ -27,9 +27,7 @@ export const connectToDB = async () => {
 };
 
 export const getProducts = async () => {
-  const res = await fetch(
-    "https://eco-shop-example-j755fxk8r-oleg-koshelevskiy.vercel.app/api/products"
-  );
+  const res = await fetch(`${process.env.URL}/api/products`);
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");
