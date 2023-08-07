@@ -18,7 +18,7 @@
     "framer-motion": "^10.15.0",
     "lodash": "^4.17.21",
     "mongodb": "^5.7.0",
-    "mongoose": "^7.4.1",
+    "mongoose": "^7.4.2",
     "next": "^13.4.12",
     "next-auth": "^4.22.3",
     "npm": "^9.8.1",
