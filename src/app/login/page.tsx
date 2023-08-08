@@ -40,13 +40,13 @@ const LoginPage = () => {
         <>
           {providers &&
             Object.values(providers).map((provider: any) => (
-              <div key={provider.name} className="flex justify-center">
+              <div key={provider.name} className="flex justify-center m-2">
                 <Button
                   type="button"
                   onClick={() => signIn(provider.id)}
                   className="main_btn"
                 >
-                  Sign In with {provider.name}
+                  <div>Sign In with {provider.name}</div>
                 </Button>
               </div>
             ))}
