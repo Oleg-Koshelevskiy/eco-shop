@@ -6,6 +6,7 @@ declare module "next-auth" {
       email: string;
       id: string;
       image: string;
+      name: string;
     };
   }
   interface Profile {

@@ -22,20 +22,26 @@ const LoginPage = () => {
     <section>
       <h2 className="secondary_header">Login Page</h2>
       {session?.user ? (
-        <div className="flex justify-center gap-3 md:gap-5">
-          <Button type="button" onClick={signOut} className="secondary_btn ">
-            Sign Out
-          </Button>
-          <Link href="/profile">
-            <Image
-              src={session?.user.image}
-              width={37}
-              height={37}
-              className="rounded-full"
-              alt="profile"
-            />
+        <>
+          <div className="flex justify-center gap-3 md:gap-5">
+            <div className="flex gap-1 items-center">
+              <Image
+                src={session?.user.image}
+                width={37}
+                height={37}
+                className="rounded-full"
+                alt="profile"
+              />
+              <div className="justify">{session?.user.name}</div>
+            </div>
+            <Button type="button" onClick={signOut} className="secondary_btn ">
+              Sign Out
+            </Button>
+          </div>
+          <Link href="/profile" className="flex justify-center mt-8">
+            <div className="main_btn">User profile page</div>
           </Link>
-        </div>
+        </>
       ) : (
         <>
           {providers &&

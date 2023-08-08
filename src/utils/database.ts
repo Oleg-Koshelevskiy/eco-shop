@@ -35,3 +35,13 @@ export const getProducts = async () => {
 
   return res.json();
 };
+
+export const getUser = async (userEmail: string) => {
+  const res = await fetch(`${process.env.URL}/api/users/?email=${userEmail}`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+};
