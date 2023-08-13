@@ -7,7 +7,7 @@ const ProductsList = async () => {
 
   return (
     <section className="container max-w-7xl mx-auto">
-      <div className="flex flex-wrap justify-center sm:justify-between mt-8">
+      <div className="flex flex-wrap justify-start mt-8">
         {product_list.map((product: Product) => (
           <ProductCard
             key={product._id}

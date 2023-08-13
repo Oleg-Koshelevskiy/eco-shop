@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { ConnectOptions } from "mongoose";
 
 let isConnected = false;
 
@@ -14,9 +14,9 @@ export const connectToDB = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI, {
       dbName: "ecoshop",
-      // useNewUrlParser: true,
-      // useUnifiedTopology: true,
-    });
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    } as ConnectOptions);
 
     isConnected = true;
 
@@ -27,7 +27,9 @@ export const connectToDB = async () => {
 };
 
 export const getProducts = async () => {
-  const res = await fetch(`${process.env.URL}/api/products`);
+  const res = await fetch(`${process.env.URL}/api/products`, {
+    cache: "no-store",
+  });
 
   if (!res.ok) {
     throw new Error("Failed to fetch data");

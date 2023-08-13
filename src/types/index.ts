@@ -20,6 +20,20 @@ export interface BtnProps {
   key?: string;
 }
 
+export interface InputProps {
+  type: "text" | "number";
+  id?: string;
+  onChange?: (e: any) => void;
+  disabled?: boolean;
+  className: string;
+  value: string;
+  step?: string;
+  min?: string;
+  max?: string;
+  readOnly?: boolean;
+  placeholder?: string;
+}
+
 export interface Rating {
   rating: number;
 }
@@ -39,6 +53,12 @@ export interface Props {
 
 export interface CartItems {
   [id: string]: number;
+}
+
+export interface Order {
+  userId: string;
+  date: Date;
+  products: CartItems;
 }
 
 export interface ItemId {
@@ -85,4 +105,17 @@ export type CartContextType = {
 
 export interface ProcessEnv {
   [key: string]: string | undefined;
+}
+
+export interface ProductForm {
+  addProductHandler: (e: any) => void;
+  product: {
+    name: string;
+    category: string;
+    description: string;
+    image: string;
+    price: string;
+  };
+  setProduct: (e: any) => void;
+  submitting: Boolean;
 }

@@ -9,9 +9,8 @@ const ProductSchema = new Schema({
   },
   name: {
     type: String,
-  },
-  new: {
-    type: Boolean,
+    unique: [true, "Name already exists!"],
+    requred: [true, "Name is required!"],
   },
   photo: {
     type: String,

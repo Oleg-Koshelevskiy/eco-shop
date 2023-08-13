@@ -10,7 +10,6 @@ export default async function Page({
   params: { product: string };
 }) {
   const product_list = await getProducts();
-  console.log(product_list);
 
   const filteredProducts = product_list.filter(
     (p: Product) => p.name.toLowerCase() === params.product
@@ -20,6 +19,7 @@ export default async function Page({
   if (filteredProducts.length < 1) return <div>Found no items!</div>;
 
   const filteredProduct = filteredProducts[0];
+  console.log(filteredProducts);
 
   const productPage: boolean = true;
 
@@ -65,7 +65,7 @@ export default async function Page({
               {filteredProduct.description}
             </div>
             <OrderBlock
-              id={filteredProduct.id}
+              id={filteredProduct._id}
               productPage={productPage}
               name={filteredProduct.name}
             />

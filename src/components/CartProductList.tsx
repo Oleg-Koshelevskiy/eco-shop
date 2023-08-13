@@ -7,11 +7,27 @@ import { getProductsObject } from "@/utils";
 import { Product } from "@/types";
 import { useProducts } from "@/hooks/useProducts";
 import Button from "./UI/Button";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import useSWRMutation from "swr/mutation";
 const { keys } = require("lodash");
+
+async function sendRequest(url: string, { arg }) {
+  return fetch(url, {
+    method: "POST",
+    body: JSON.stringify(arg),
+  });
+}
 
 const CartProductList = () => {
   const { products, isLoading, isError } = useProducts();
   const context = useContext(CartContext);
+  const { data: session } = useSession();
+  const router = useRouter();
+  const { trigger, isMutating } = useSWRMutation(
+    "/api/orders/new",
+    sendRequest
+  );
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Failed to load!</div>;
@@ -20,10 +36,6 @@ const CartProductList = () => {
     getProductsObject(products);
   const productsInCart = context.cartState;
 
-  const clearCartHandler = () => {
-    context.clearCart();
-  };
-
   const values: number[] = keys(productsInCart).map(
     (productId: string) =>
       productsObject[productId].price * productsInCart[productId]
@@ -31,6 +43,25 @@ const CartProductList = () => {
 
   const total: number =
     Math.round(values.reduce((a, b) => a + b, 0) * 100) / 100;
+
+  const orderedProducts = keys(productsInCart).map((productId: string) => {
+    return {
+      id: productId,
+      amount: productsInCart[productId],
+      price: productsObject[productId].price,
+      name: productsObject[productId].name,
+      image: productsObject[productId].photo,
+    };
+  });
+
+  const orderHandler = async () => {
+    await trigger({
+      userId: session?.user.id,
+      date: new Date(),
+      products: orderedProducts,
+    });
+    context.clearCart();
+  };
 
   return (
     <div>
@@ -56,13 +87,27 @@ const CartProductList = () => {
         </div>
       </div>
       <div className="flex gap-4 justify-center my-4">
-        <Button type="button" onClick={clearCartHandler} className="cancel_btn">
+        <Button
+          type="button"
+          onClick={() => context.clearCart()}
+          className="cancel_btn"
+        >
           Clear cart
         </Button>
-        <Button type="button" className="main_btn">
-          Pay order
+        <Button
+          disabled={isMutating ? true : false}
+          type="button"
+          className="main_btn"
+          onClick={session?.user ? orderHandler : () => router.push("/login")}
+        >
+          {session?.user ? "Pay order" : "Log in and pay"}
         </Button>
       </div>
+      {isMutating && (
+        <div className="flex justify-center font-bold text-xl text-lime-700">
+          Sending order...
+        </div>
+      )}
     </div>
   );
 };

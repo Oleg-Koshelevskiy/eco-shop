@@ -1,5 +1,6 @@
 "use client";
 
+import { OrdersList } from "@/components";
 import { useUser } from "@/hooks/useUsers";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
@@ -11,12 +12,13 @@ const Profile = () => {
   const router = useRouter();
   const { user, isLoading, isError } = useUser(session?.user.email);
 
+  if (isLoading) return <div className="flex justify-center">Loading...</div>;
+  if (isError)
+    return <div className="flex justify-center">Failed to load!</div>;
+
   if (!session?.user) {
     router.push("/login");
   }
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Failed to load!</div>;
-
   const { email, image, isAdmin, username } = user[0];
   return (
     <section className="mt-14 sm:mt-18 md:mt-20 container max-w-7xl mx-auto">
@@ -39,6 +41,8 @@ const Profile = () => {
           )}
         </div>
       </div>
+      <h2 className="secondary_header">My orders</h2>
+      <OrdersList email={email} />
     </section>
   );
 };

@@ -17,6 +17,8 @@ import CartProductList from "./CartProductList";
 import Button from "./UI/Button";
 import Login from "./Login";
 import Provider from "./Provider";
+import ProductForm from "./ProductForm";
+import OrdersList from "./OrdersList";
 
 export {
   Header,
@@ -38,4 +40,6 @@ export {
   Button,
   Login,
   Provider,
+  ProductForm,
+  OrdersList,
 };

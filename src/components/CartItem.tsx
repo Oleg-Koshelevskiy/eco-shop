@@ -6,6 +6,7 @@ import { CartItem } from "@/types";
 import { blurDataUrl } from "@/utils";
 import Image from "next/image";
 import React, { useContext } from "react";
+import Link from "next/link";
 
 const CartItem = ({ quantity, ...product }: CartItem) => {
   const { _id, price, photo, name } = product.product;
@@ -36,7 +37,10 @@ const CartItem = ({ quantity, ...product }: CartItem) => {
 
   return (
     <div className="text-sm sm:text-base flex gap-1 sm:gap-2 m-1 justify-between align-middle items-center">
-      <div className="h-12 w-12 relative">
+      <Link
+        href={`/products/${name.toLowerCase()}`}
+        className="h-12 w-12 relative"
+      >
         <Image
           src={photo}
           alt={name}
@@ -47,7 +51,7 @@ const CartItem = ({ quantity, ...product }: CartItem) => {
           blurDataURL={blurDataUrl}
           quality={20}
         />
-      </div>
+      </Link>
       <div className="flex-1">{nameStr}</div>
       <div className="hidden sm:block flex-none w-16 sm:w-20">{priceStr}</div>
       <div className="flex-none w-8 sm:w-10">{quantity}</div>

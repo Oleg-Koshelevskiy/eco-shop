@@ -3,6 +3,7 @@ import OrderForm from "./OrderForm";
 import Link from "next/link";
 
 const OrderBlock = ({ id, productPage, name }: ItemId) => {
+  console.log(id);
   return (
     <div>
       <div className="flex gap-4 justify-center my-4">
