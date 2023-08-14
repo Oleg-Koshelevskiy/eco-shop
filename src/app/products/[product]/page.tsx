@@ -19,7 +19,6 @@ export default async function Page({
   if (filteredProducts.length < 1) return <div>Found no items!</div>;
 
   const filteredProduct = filteredProducts[0];
-  console.log(filteredProducts);
 
   const productPage: boolean = true;
 

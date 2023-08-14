@@ -1,11 +1,12 @@
 import { useOrders } from "@/hooks/useOrders";
+import { OrderBlock, OrderProduct, UserId } from "@/types";
 import { blurDataUrl } from "@/utils";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const OrdersList = ({ email }) => {
-  const { orders, isLoading, isError } = useOrders(email);
+const OrdersList = ({ userId }: UserId) => {
+  const { orders, isLoading, isError } = useOrders(userId);
 
   if (isLoading) return <div className="flex justify-center">Loading...</div>;
   if (isError)
@@ -13,9 +14,9 @@ const OrdersList = ({ email }) => {
 
   return (
     <div className="my-4 p-2">
-      {orders.map((order) => {
+      {orders.reverse().map((order: OrderBlock) => {
         const values: number[] = order.products.map(
-          (p) => +p.amount * +p.price
+          (p: OrderProduct) => +p.amount * +p.price
         );
         const total: number =
           Math.round(values.reduce((a, b) => a + b, 0) * 100) / 100;
@@ -28,7 +29,7 @@ const OrdersList = ({ email }) => {
               Date: {order.date}
             </div>
             <div className="px-2">
-              {order.products.map((product) => (
+              {order.products.map((product: OrderProduct) => (
                 <Link
                   href={`/products/${product.name.toLowerCase()}`}
                   key={product._id}

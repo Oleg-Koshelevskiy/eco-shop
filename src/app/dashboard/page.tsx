@@ -1,13 +1,18 @@
 "use client";
 
-import { Button, ProductForm } from "@/components";
+import { Button, OrdersList, ProductForm } from "@/components";
 import { useUser } from "@/hooks/useUsers";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const Dashboard = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push("/login");
+    },
+  });
   const router = useRouter();
   const { user, isLoading, isError } = useUser(session?.user.email);
   const [submitting, setSubmitting] = useState(false);
@@ -20,18 +25,21 @@ const Dashboard = () => {
     price: "",
   });
 
-  // if (!session?.user) {
-  //   router.push("/login");
-  //   return;
-  // }
-
-  // if (!user[0].isAdmin) {
-  //   router.push("/profile");
-  // }
+  if (status === "loading") {
+    return (
+      <div className="flex justify-center text-lime-600 mt-6">
+        Checking your authentification...
+      </div>
+    );
+  }
 
   if (isLoading) return <div className="flex justify-center">Loading...</div>;
   if (isError)
     return <div className="flex justify-center">Failed to load!</div>;
+
+  if (status === "authenticated") {
+    user[0].isAdmin || router.push("/profile");
+  }
 
   const showFormHandler = () => {
     setShowForm((state) => !state);
@@ -86,6 +94,7 @@ const Dashboard = () => {
           submitting={submitting}
         />
       )}
+      <OrdersList userId={""} />
     </section>
   );
 };

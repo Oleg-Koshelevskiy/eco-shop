@@ -8,17 +8,27 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 const Profile = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push("/login");
+    },
+  });
   const router = useRouter();
   const { user, isLoading, isError } = useUser(session?.user.email);
+
+  if (status === "loading") {
+    return (
+      <div className="flex justify-center text-lime-600 mt-6">
+        Checking your authentification...
+      </div>
+    );
+  }
 
   if (isLoading) return <div className="flex justify-center">Loading...</div>;
   if (isError)
     return <div className="flex justify-center">Failed to load!</div>;
 
-  if (!session?.user) {
-    router.push("/login");
-  }
   const { email, image, isAdmin, username } = user[0];
   return (
     <section className="mt-14 sm:mt-18 md:mt-20 container max-w-7xl mx-auto">
@@ -42,7 +52,7 @@ const Profile = () => {
         </div>
       </div>
       <h2 className="secondary_header">My orders</h2>
-      <OrdersList email={email} />
+      <OrdersList userId={session?.user.id} />
     </section>
   );
 };

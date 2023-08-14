@@ -56,9 +56,30 @@ export interface CartItems {
 }
 
 export interface Order {
-  userId: string;
-  date: Date;
-  products: CartItems;
+  arg: {
+    userId: string | undefined;
+    date: Date;
+    products: CartItems;
+  };
+}
+
+export interface OrderProduct {
+  name: string;
+  _id: string;
+  image: string;
+  amount: number;
+  price: number;
+}
+
+export interface OrderBlock {
+  _id: string;
+  customer: string;
+  date: string;
+  products: OrderProduct[];
+}
+
+export interface UserId {
+  userId: string | undefined;
 }
 
 export interface ItemId {

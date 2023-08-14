@@ -13,7 +13,6 @@ const LoginPage = () => {
   useEffect(() => {
     const setUpProviders = async () => {
       const response: any = await getProviders();
-      console.log(response);
       setProviders(response);
     };
     setUpProviders();
