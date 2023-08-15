@@ -27,7 +27,7 @@ export const connectToDB = async () => {
 
 export const getProducts = async () => {
   const res = await fetch(`${process.env.URL}/api/products`, {
-    cache: "no-store",
+    next: { revalidate: 10 },
   });
 
   if (!res.ok) {
