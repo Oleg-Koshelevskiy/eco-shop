@@ -79,7 +79,7 @@ export interface OrderBlock {
 }
 
 export interface UserId {
-  userId: string | undefined;
+  userId: string | null;
 }
 
 export interface ItemId {

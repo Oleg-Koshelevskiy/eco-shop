@@ -4,7 +4,7 @@ import { CartContext } from "@/context/cartContext";
 import { useContext } from "react";
 import CartItem from "./CartItem";
 import { getProductsObject } from "@/utils";
-import { Product } from "@/types";
+import { Order, Product } from "@/types";
 import { useProducts } from "@/hooks/useProducts";
 import Button from "./UI/Button";
 import { useSession } from "next-auth/react";
@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import useSWRMutation from "swr/mutation";
 const { keys } = require("lodash");
 
-async function sendRequest(url: string, { arg }) {
+async function sendRequest(url: string, { arg }:Order) {
   return fetch(url, {
     method: "POST",
     body: JSON.stringify(arg),

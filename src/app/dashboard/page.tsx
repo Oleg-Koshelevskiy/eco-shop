@@ -1,10 +1,10 @@
 "use client";
 
 import { Button, OrdersList, ProductForm } from "@/components";
-import { useUser } from "@/hooks/useUsers";
+// import { useUser } from "@/hooks/useUsers";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Dashboard = () => {
   const { data: session, status } = useSession({
@@ -14,7 +14,7 @@ const Dashboard = () => {
     },
   });
   const router = useRouter();
-  const { user, isLoading, isError } = useUser(session?.user.email);
+  // const { user, isLoading, isError } = useUser(session?.user.email);
   const [submitting, setSubmitting] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [product, setProduct] = useState({
@@ -33,13 +33,13 @@ const Dashboard = () => {
     );
   }
 
-  if (isLoading) return <div className="flex justify-center">Loading...</div>;
-  if (isError)
-    return <div className="flex justify-center">Failed to load!</div>;
+  // if (isLoading) return <div className="flex justify-center">Loading...</div>;
+  // if (isError)
+  //   return <div className="flex justify-center">Failed to load!</div>;
 
-  if (status === "authenticated") {
-    user[0].isAdmin || router.push("/profile");
-  }
+  // useEffect(() => {
+  //   if (session?.user.email !== "oleg17.k@gmail.com") router.push("/profile");
+  // }, []);
 
   const showFormHandler = () => {
     setShowForm((state) => !state);
@@ -94,7 +94,7 @@ const Dashboard = () => {
           submitting={submitting}
         />
       )}
-      <OrdersList userId={""} />
+      <OrdersList userId={null} />
     </section>
   );
 };
