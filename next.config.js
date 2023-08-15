@@ -6,7 +6,12 @@ const nextConfig = {
     serverComponentsExternalPackages: ["mongoose"],
   },
   images: {
-    domains: ["lh3.googleusercontent.com"],
+    domains: [
+      "lh3.googleusercontent.com",
+      "randomuser.me",
+      "images.unsplash.com",
+      "cdn-icons-png.flaticon.com",
+    ],
   },
   webpack: (config) => {
     Object.assign(config.resolve.alias, {

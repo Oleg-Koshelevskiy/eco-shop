@@ -32,7 +32,7 @@ body {
 }
 
 .secondary_header {
-  @apply text-center text-2xl sm:text-3xl font-bold tracking-tight bg-clip-text text-transparent lg:text-4xl bg-gradient-to-r from-green-500 to-lime-500 capitalize my-6;
+  @apply text-center text-2xl sm:text-3xl font-bold tracking-tight bg-clip-text text-transparent lg:text-4xl bg-gradient-to-r from-green-500 to-lime-500 my-6;
 }
 
 .glassmorphism {
