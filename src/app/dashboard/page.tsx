@@ -1,7 +1,6 @@
 "use client";
 
 import { Button, OrdersList, ProductForm } from "@/components";
-// import { useUser } from "@/hooks/useUsers";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -14,7 +13,11 @@ const Dashboard = () => {
     },
   });
   const router = useRouter();
-  // const { user, isLoading, isError } = useUser(session?.user.email);
+
+  useEffect(() => {
+    if (session?.user.email !== "oleg17.k@gmail.com") router.push("/profile");
+  }, []);
+
   const [submitting, setSubmitting] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [product, setProduct] = useState({
@@ -32,14 +35,6 @@ const Dashboard = () => {
       </div>
     );
   }
-
-  // if (isLoading) return <div className="flex justify-center">Loading...</div>;
-  // if (isError)
-  //   return <div className="flex justify-center">Failed to load!</div>;
-
-  // useEffect(() => {
-  //   if (session?.user.email !== "oleg17.k@gmail.com") router.push("/profile");
-  // }, []);
 
   const showFormHandler = () => {
     setShowForm((state) => !state);
