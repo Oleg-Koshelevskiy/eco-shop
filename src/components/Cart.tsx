@@ -1,14 +1,15 @@
 "use client";
-import { useContext } from "react";
-import { CartContext } from "@/context/cartContext";
+
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import React from "react";
 import Link from "next/link";
+import { useCartStore } from "@/context/cartStore";
+import useFromStore from "@/hooks/useFromStore";
 
 const Cart = () => {
-  const context = useContext(CartContext);
-  const itemTypes = Object.keys(context.cartState).length;
-
+  const cartItems = useFromStore(useCartStore, (state) => state.cart);
+  const itemTypes = cartItems ? Object.keys(cartItems).length : "";
+  console.log(cartItems);
   return (
     <Link
       href={"/cart"}

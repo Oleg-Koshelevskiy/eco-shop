@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const LodashModuleReplacementPlugin = require("lodash-webpack-plugin");
+
 const nextConfig = {
   // transpilePackages: ["@package/bug"],
   experimental: {
@@ -23,6 +25,13 @@ const nextConfig = {
       kerberos: false,
       "supports-color": false,
     });
+    config.plugins.push(
+      new LodashModuleReplacementPlugin({
+        modularize: true,
+        omit: "omit",
+        keys: "keys",
+      })
+    );
     return config;
   },
   // webpack(config) {

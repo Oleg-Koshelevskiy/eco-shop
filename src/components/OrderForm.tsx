@@ -1,18 +1,20 @@
 "use client";
 
-import { CartContext } from "@/context/cartContext";
 import { OrderItem } from "@/types";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import Button from "./UI/Button";
 import Input from "./UI/Input";
+import { useCartStore } from "@/context/cartStore";
 
 const OrderForm = (props: OrderItem) => {
   const [value, setValue] = useState("1");
-  const context = useContext(CartContext);
+  // const context = useContext(CartContext);
+  const addtoCart = useCartStore((state) => state.changeCart);
 
   const addItemHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    context.addToCart(props.id, +value);
+    // context.addToCart(props.id, +value);
+    addtoCart(props.id, +value);
   };
 
   return (

@@ -1,7 +1,7 @@
 import { Footer, Header } from "@/components";
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
-import CartContextProvider from "@/context/CartContextProvider";
+
 import AuthProvider from "@/components/Provider";
 
 const inter = Inter({
@@ -23,11 +23,9 @@ export default function RootLayout({
     <html lang="en" className={inter.className}>
       <body className="min-h-screen flex flex-col bg-gradient-to-r from-cyan-100 to-blue-100 box-border">
         <AuthProvider>
-          <CartContextProvider>
-            <Header />
-            {children}
-            <Footer />
-          </CartContextProvider>
+          <Header />
+          {children}
+          <Footer />
         </AuthProvider>
       </body>
     </html>

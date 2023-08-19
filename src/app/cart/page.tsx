@@ -1,12 +1,12 @@
 "use client";
 
 import { CartProductList } from "@/components";
-import { CartContext } from "@/context/cartContext";
-import { useContext } from "react";
+import { useCartStore } from "@/context/cartStore";
+import useFromStore from "@/hooks/useFromStore";
 
 const page = () => {
-  const context = useContext(CartContext);
-  const hasAddedProducts = Object.keys(context.cartState).length;
+  const cartItems = useFromStore(useCartStore, (state) => state.cart);
+  const hasAddedProducts = cartItems ? Object.keys(cartItems).length : {};
 
   return (
     <div className="text-center">

@@ -1,16 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { CartContext } from "@/context/cartContext";
+// import { CartContext } from "@/context/cartContext";
 import { CartItem } from "@/types";
 import { blurDataUrl } from "@/utils";
 import Image from "next/image";
-import React, { useContext } from "react";
+// import React, { useContext } from "react";
 import Link from "next/link";
+import { useCartStore } from "@/context/cartStore";
 
 const CartItem = ({ quantity, ...product }: CartItem) => {
   const { _id, price, photo, name } = product.product;
-  const context = useContext(CartContext);
+  // const context = useContext(CartContext);
+  const changeCart = useCartStore((state) => state.changeCart);
+  const removeFromCart = useCartStore((state) => state.removeFromCart);
 
   let nameStr: string = "";
   if (name.length > 12) {
@@ -18,14 +21,17 @@ const CartItem = ({ quantity, ...product }: CartItem) => {
   } else nameStr = name;
 
   const addItemHandler = () => {
-    context.changeCartItem(_id, quantity + 1);
+    // context.changeCartItem(_id, quantity + 1);
+    changeCart(_id, 1);
   };
 
   const removeItemHandler = () => {
     if (quantity === 1) {
-      context.removeCartItem(_id);
+      // context.removeCartItem(_id);
+      removeFromCart(_id);
     } else {
-      context.changeCartItem(_id, quantity - 1);
+      // context.changeCartItem(_id, quantity - 1);
+      changeCart(_id, -1);
     }
   };
 

@@ -1,7 +1,5 @@
 "use client";
 
-import { CartContext } from "@/context/cartContext";
-import { useContext } from "react";
 import CartItem from "./CartItem";
 import { getProductsObject } from "@/utils";
 import { Order, Product } from "@/types";
@@ -10,9 +8,11 @@ import Button from "./UI/Button";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import useSWRMutation from "swr/mutation";
+import { useCartStore } from "@/context/cartStore";
+import useFromStore from "@/hooks/useFromStore";
 const { keys } = require("lodash");
 
-async function sendRequest(url: string, { arg }:Order) {
+async function sendRequest(url: string, { arg }: Order) {
   return fetch(url, {
     method: "POST",
     body: JSON.stringify(arg),
@@ -21,7 +21,8 @@ async function sendRequest(url: string, { arg }:Order) {
 
 const CartProductList = () => {
   const { products, isLoading, isError } = useProducts();
-  const context = useContext(CartContext);
+  const productsInCart = useFromStore(useCartStore, (state) => state.cart);
+  const clearCart = useCartStore((state) => state.clearCart);
   const { data: session } = useSession();
   const router = useRouter();
   const { trigger, isMutating } = useSWRMutation(
@@ -34,10 +35,10 @@ const CartProductList = () => {
 
   const productsObject: { [_id: string]: Product } =
     getProductsObject(products);
-  const productsInCart = context.cartState;
 
   const values: number[] = keys(productsInCart).map(
     (productId: string) =>
+      // @ts-ignore
       productsObject[productId].price * productsInCart[productId]
   );
 
@@ -47,6 +48,7 @@ const CartProductList = () => {
   const orderedProducts = keys(productsInCart).map((productId: string) => {
     return {
       id: productId,
+      // @ts-ignore
       amount: productsInCart[productId],
       price: productsObject[productId].price,
       name: productsObject[productId].name,
@@ -60,7 +62,8 @@ const CartProductList = () => {
       date: new Date(),
       products: orderedProducts,
     });
-    context.clearCart();
+    // context.clearCart();
+    useCartStore((state) => state.clearCart);
   };
 
   return (
@@ -78,6 +81,7 @@ const CartProductList = () => {
           <CartItem
             key={productId}
             product={productsObject[productId]}
+            // @ts-ignore
             quantity={productsInCart[productId]}
           />
         ))}
@@ -89,7 +93,7 @@ const CartProductList = () => {
       <div className="flex gap-4 justify-center my-4">
         <Button
           type="button"
-          onClick={() => context.clearCart()}
+          onClick={() => setTimeout(() => clearCart(), 300)}
           className="cancel_btn"
         >
           Clear cart

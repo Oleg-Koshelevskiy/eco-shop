@@ -47,12 +47,17 @@ export interface CartItem {
   product: Product;
 }
 
+export interface CartProduct {
+  quantity: number;
+  id: string;
+}
+
 export interface Props {
   children: ReactNode;
 }
 
 export interface CartItems {
-  [id: string]: number;
+  [key: string]: number;
 }
 
 export interface Order {
