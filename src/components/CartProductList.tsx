@@ -62,8 +62,8 @@ const CartProductList = () => {
       date: new Date(),
       products: orderedProducts,
     });
-    // context.clearCart();
-    useCartStore((state) => state.clearCart);
+
+    clearCart();
   };
 
   return (
@@ -102,7 +102,9 @@ const CartProductList = () => {
           disabled={isMutating ? true : false}
           type="button"
           className="main_btn"
-          onClick={session?.user ? orderHandler : () => router.push("/login")}
+          onClick={
+            session?.user ? () => orderHandler() : () => router.push("/login")
+          }
         >
           {session?.user ? "Pay order" : "Log in and pay"}
         </Button>

@@ -9,7 +9,6 @@ import useFromStore from "@/hooks/useFromStore";
 const Cart = () => {
   const cartItems = useFromStore(useCartStore, (state) => state.cart);
   const itemTypes = cartItems ? Object.keys(cartItems).length : "";
-  console.log(cartItems);
   return (
     <Link
       href={"/cart"}
