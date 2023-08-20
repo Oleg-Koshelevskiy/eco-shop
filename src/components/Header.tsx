@@ -7,7 +7,7 @@ import Login from "./Login";
 
 const Header = () => {
   return (
-    <header className="container mx-auto flex justify-between items-center sm:gap-3 max-w-7xl my-2 px-2">
+    <header className="container mx-auto flex justify-between items-center sm:gap-3 my-2 px-2">
       <Link href="/" className="flex gap-2 items-center hover:cursor-pointer">
         <Image
           src="/images/eco-logo.png"

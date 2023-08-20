@@ -6,7 +6,7 @@ const MostPopular = async () => {
   const product_list = await getProducts();
 
   return (
-    <section className="mt-14 sm:mt-18 md:mt-20 container max-w-7xl mx-auto">
+    <section className="mt-14 sm:mt-18 md:mt-20 container mx-auto">
       <h2 className="text-center secondary_header">Most Popular</h2>
       <div className="flex flex-wrap snap-x">
         {product_list

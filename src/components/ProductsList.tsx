@@ -6,7 +6,7 @@ const ProductsList = async () => {
   const product_list = await getProducts();
 
   return (
-    <section className="container max-w-7xl mx-auto">
+    <section className="container mx-auto">
       <div className="flex flex-wrap justify-start mt-8">
         {product_list.map((product: Product) => (
           <ProductCard
