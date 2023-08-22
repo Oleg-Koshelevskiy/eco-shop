@@ -9,7 +9,7 @@ import { fetchItems } from "@/utils/fetchItems";
 import { useEffect, useRef } from "react";
 
 const OrdersList = ({ userId }: UserId) => {
-  const lastOrderRef = useRef(null);
+  const myRef = useRef(null);
 
   const { data, error, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
     ["query"],
@@ -24,16 +24,16 @@ const OrdersList = ({ userId }: UserId) => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((e) => fetchNextPage());
     });
-    if (lastOrderRef.current) {
-      observer.observe(lastOrderRef.current);
+    if (myRef.current) {
+      observer.observe(myRef.current);
     }
-  }, [lastOrderRef]);
+    console.log(myRef);
+  }, [myRef]);
 
-  console.log(lastOrderRef);
-
-  if (isFetchingNextPage)
-    return <div className="flex justify-center">Loading...</div>;
+  // if (isFetchingNextPage)
+  //   return <div className="flex justify-center">Loading...</div>;
   if (error) return <div className="flex justify-center">Failed to load!</div>;
+
   return (
     <div className="my-4 p-2">
       {data?.pages.map((page, i) => (
@@ -47,7 +47,7 @@ const OrdersList = ({ userId }: UserId) => {
             return (
               <div
                 key={order._id}
-                className="border border-lime-500 rounded-md my-64 bg-slate-100 container max-w-md mx-auto"
+                className="border border-lime-500 rounded-md my-36 bg-slate-100 container max-w-md mx-auto"
               >
                 <div className="bg-slate-200 px-2 rounded-md">
                   Date: {order.date}
@@ -87,7 +87,7 @@ const OrdersList = ({ userId }: UserId) => {
           })}
         </span>
       ))}
-      <div ref={lastOrderRef}>ref</div>
+      <div ref={myRef}></div>
 
       {/* <button
         onClick={() => fetchNextPage()}
