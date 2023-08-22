@@ -6,7 +6,6 @@ export const fetchItems = async (page: number, userId: string | null) => {
   );
   const data = await res.json();
   const orders = data.slice((page - 1) * 2, page * 2);
-  console.log(orders);
 
   return orders;
 };

@@ -1,22 +1,12 @@
 import { Footer, Header } from "@/components";
 import { Inter } from "next/font/google";
 import "../styles/globals.css";
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
-import AuthProvider from "@/components/Provider";
 import { Providers } from "./providers";
 
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
 });
-
-const queryClient = new QueryClient();
 
 export const metadata = {
   title: "Ecoshop",

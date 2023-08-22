@@ -1,6 +1,5 @@
 "use client";
 
-import { useOrders } from "@/hooks/useOrders";
 import { OrderBlock, OrderProduct, UserId } from "@/types";
 import { blurDataUrl } from "@/utils";
 import Image from "next/image";
@@ -10,18 +9,14 @@ import { fetchItems } from "@/utils/fetchItems";
 import { useEffect, useRef } from "react";
 
 const OrdersList = ({ userId }: UserId) => {
-  // const { orders, isLoading, isError } = useOrders(userId);
-  const myRef = useRef(null);
+  const lastOrderRef = useRef(null);
+
   const { data, error, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
     ["query"],
-    async ({ pageParam = 1 }) => {
-      const response = await fetchItems(pageParam, userId);
-      return response;
-    },
+    async ({ pageParam = 1 }) => await fetchItems(pageParam, userId),
+
     {
-      getNextPageParam: (_, pages) => {
-        return pages.length + 1;
-      },
+      getNextPageParam: (_, pages) => pages.length + 1,
     }
   );
 
@@ -29,12 +24,12 @@ const OrdersList = ({ userId }: UserId) => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((e) => fetchNextPage());
     });
-    if (myRef.current) {
-      observer.observe(myRef.current);
+    if (lastOrderRef.current) {
+      observer.observe(lastOrderRef.current);
     }
-  }, [myRef]);
+  }, [lastOrderRef]);
 
-  console.log(data?.pages);
+  console.log(lastOrderRef);
 
   if (isFetchingNextPage)
     return <div className="flex justify-center">Loading...</div>;
@@ -92,7 +87,7 @@ const OrdersList = ({ userId }: UserId) => {
           })}
         </span>
       ))}
-      <span ref={myRef}>span</span>
+      <div ref={lastOrderRef}>ref</div>
 
       {/* <button
         onClick={() => fetchNextPage()}
