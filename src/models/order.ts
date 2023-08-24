@@ -9,7 +9,13 @@ const OrderedItemSchema = new Schema({
 });
 
 const OrderSchema = new Schema({
-  customer: {
+  userId: {
+    type: String,
+  },
+  userName: {
+    type: String,
+  },
+  userEmail: {
     type: String,
   },
   date: {

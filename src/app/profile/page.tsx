@@ -29,6 +29,8 @@ const Profile = () => {
   if (isError)
     return <div className="flex justify-center">Failed to load!</div>;
 
+  console.log(session?.user.id);
+
   const { email, image, isAdmin, username } = user[0];
   return (
     <section className="mt-14 sm:mt-18 md:mt-20 container max-w-7xl mx-auto">

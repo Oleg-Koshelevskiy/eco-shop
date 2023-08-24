@@ -20,6 +20,7 @@ const Dashboard = () => {
 
   const [submitting, setSubmitting] = useState(false);
   const [showForm, setShowForm] = useState(false);
+  const [showOrders, setShowOrders] = useState(false);
   const [product, setProduct] = useState({
     name: "",
     category: "",
@@ -38,6 +39,10 @@ const Dashboard = () => {
 
   const showFormHandler = () => {
     setShowForm((state) => !state);
+  };
+
+  const showOrdersHandler = () => {
+    setShowOrders((state) => !state);
   };
 
   const addProductHandler = async (e: any) => {
@@ -72,24 +77,40 @@ const Dashboard = () => {
   return (
     <section className="mt-14 sm:mt-18 md:mt-20 container max-w-7xl mx-auto">
       <h1 className="secondary_header">Admin dashboard</h1>
-      <div className="flex justify-center">
-        <Button
-          onClick={showFormHandler}
-          type="button"
-          className={showForm ? "cancel_btn" : "main_btn"}
-        >
-          {!showForm ? "Add new product" : "Cancel adding"}
-        </Button>
+      <div className="flex justify-around">
+        <div className="basis-1/2">
+          <div className="flex justify-center my-2">
+            <Button
+              onClick={showFormHandler}
+              type="button"
+              className={showForm ? "cancel_btn" : "main_btn"}
+            >
+              {!showForm ? "Add new product" : "Cancel adding"}
+            </Button>
+          </div>
+
+          {showForm && (
+            <ProductForm
+              addProductHandler={addProductHandler}
+              product={product}
+              setProduct={setProduct}
+              submitting={submitting}
+            />
+          )}
+        </div>
+        <div className="basis-1/2">
+          <div className="flex justify-center my-2">
+            <Button
+              onClick={showOrdersHandler}
+              type="button"
+              className={showOrders ? "cancel_btn" : "main_btn"}
+            >
+              {!showOrders ? "Show orders" : "Hide orders"}
+            </Button>
+          </div>
+          {showOrders && <OrdersList userId={null} />}
+        </div>
       </div>
-      {showForm && (
-        <ProductForm
-          addProductHandler={addProductHandler}
-          product={product}
-          setProduct={setProduct}
-          submitting={submitting}
-        />
-      )}
-      <OrdersList userId={null} />
     </section>
   );
 };

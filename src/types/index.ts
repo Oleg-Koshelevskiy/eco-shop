@@ -63,6 +63,8 @@ export interface CartItems {
 export interface Order {
   arg: {
     userId: string | undefined;
+    userName: string | undefined;
+    userEmail: string | undefined;
     date: Date;
     products: CartItems;
   };
@@ -78,7 +80,9 @@ export interface OrderProduct {
 
 export interface OrderBlock {
   _id: string;
-  customer: string;
+  userId: string | undefined;
+  userName: string | undefined;
+  userEmail: string | undefined;
   date: string;
   products: OrderProduct[];
 }

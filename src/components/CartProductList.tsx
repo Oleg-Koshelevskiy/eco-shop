@@ -56,9 +56,13 @@ const CartProductList = () => {
     };
   });
 
+  console.log(session);
+
   const orderHandler = async () => {
     await trigger({
       userId: session?.user.id,
+      userName: session?.user.name,
+      userEmail: session?.user.email,
       date: new Date(),
       products: orderedProducts,
     });

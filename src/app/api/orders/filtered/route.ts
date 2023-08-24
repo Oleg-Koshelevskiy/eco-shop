@@ -7,7 +7,7 @@ export const GET = async (request: Request) => {
   try {
     await connectToDB();
 
-    const orders = await Order.find({ customer: userId });
+    const orders = await Order.find({ userId: userId });
 
     return new Response(JSON.stringify(orders), { status: 200 });
   } catch (error) {

@@ -2,12 +2,14 @@ import Order from "@/models/order";
 import { connectToDB } from "@/utils/database";
 
 export const POST = async (req: any) => {
-  const { userId, date, products } = await req.json();
+  const { userId, userName, userEmail, date, products } = await req.json();
 
   try {
     await connectToDB();
     const newOrder = new Order({
-      customer: userId,
+      userId,
+      userName,
+      userEmail,
       date,
       products,
     });

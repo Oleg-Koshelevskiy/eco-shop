@@ -27,7 +27,6 @@ const OrdersList = ({ userId }: UserId) => {
     if (myRef.current) {
       observer.observe(myRef.current);
     }
-    console.log(myRef);
   }, [myRef]);
 
   // if (isFetchingNextPage)
@@ -44,14 +43,20 @@ const OrdersList = ({ userId }: UserId) => {
             );
             const total: number =
               Math.round(values.reduce((a, b) => a + b, 0) * 100) / 100;
+
+            const dateObj = new Date(order.date);
+            const date = dateObj.toLocaleString();
             return (
               <div
                 key={order._id}
-                className="border border-lime-500 rounded-md my-36 bg-slate-100 container max-w-md mx-auto"
+                className="border border-lime-500 rounded-md my-6 bg-slate-100 container max-w-md mx-auto"
               >
                 <div className="bg-slate-200 px-2 rounded-md">
-                  Date: {order.date}
+                  <div>Date: {date}</div>
+                  <div> Customer: {order.userName} </div>
+                  <div>Email: {order.userEmail}</div>
                 </div>
+
                 <div className="px-2">
                   {order.products.map((product: OrderProduct) => (
                     <Link
