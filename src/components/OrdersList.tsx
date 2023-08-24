@@ -87,8 +87,9 @@ const OrdersList = ({ userId }: UserId) => {
           })}
         </span>
       ))}
-      <div ref={myRef}></div>
 
+      <div ref={myRef}></div>
+      {isFetchingNextPage && <div className="secondary_header">Loading...</div>}
       {/* <button
         onClick={() => fetchNextPage()}
         disabled={isFetchingNextPage}
