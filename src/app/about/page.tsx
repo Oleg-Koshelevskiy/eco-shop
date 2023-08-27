@@ -5,10 +5,10 @@ const About = () => {
   return (
     <section>
       <div className="container mx-auto px-4 py-16">
-        <h1 className="secondary_header">Про нас</h1>
+        <h1 className="secondary_header">About Us</h1>
         <p className="mt-4 text-lg text-center text-gray-600">
-          Ми - команда ентузіастів, які вірять, що екологічне життя - це не
-          тільки мода, але й необхідність.
+          We are a team of enthusiasts who believe that ecological living is not
+          only a fashion, but also a necessity.
         </p>
         <div className="mt-8 flex flex-col items-center md:flex-row md:justify-between">
           <div className="md:w-1/2 md:mr-8 relative md:h-[480px] lg:h-[768px]">
@@ -25,48 +25,46 @@ const About = () => {
           </div>
           <div className="md:w-1/2 md:ml-8 mt-6 md:mt-0">
             <h2 className="text-3xl font-semibold text-green-600">
-              Наша місія
+              Our mission
             </h2>
             <p className="mt-4 text-gray-700">
-              Наша місія - це допомогти людям зробити своє життя більш
-              екологічним та здоровим за допомогою наших продуктів і сервісів.
-              Ми пропонуємо вам широкий асортимент еко-продуктів для різних сфер
-              життя: харчування, гігієни, догляду за собою, побуту, подорожей та
-              інших. Всі наші продукти виготовлені з натуральних, органічних або
-              перероблених матеріалів, які не шкодять навколишньому середовищу і
-              вашому здоров'ю.
+              Our mission is to help people make their lives more ecological and
+              healthy with the help of our products and services. We offer you a
+              wide range of eco-products for various areas of life: nutrition,
+              hygiene, self-care, household, travel and others. All our products
+              are made from natural, organic or recycled materials that do not
+              harm the environment and your health.
             </p>
             <p className="mt-4 text-gray-700">
-              На нашому сайті ви можете знайти цікаві статті, вебінари,
-              подкасти, квізи та інші матеріали, які розповідають про екологічні
-              проблеми, рішення та ініціативи. Ви також можете приєднатися до
-              нашої спільноти еко-активістів, які діляться своїм досвідом,
-              ідеями та практиками еко-життя. Ми вважаємо, що разом ми можемо
-              зробити світ кращим місцем для життя.
-            </p>
-            <h2 className="mt-8 text-3xl font-semibold text-green-600">
-              Наша історія
-            </h2>
-            <p className="mt-4 text-gray-700">
-              Наш магазин був заснований у 2020 році двома друзями, які мріяли
-              про створення платформи для популяризації еко-життя в Україні.
-              Вони почали з невеликого онлайн-магазину, який пропонував лише
-              кілька видів еко-продуктів, але з часом розширили свій асортимент
-              та аудиторію. Сьогодні наш магазин - це один з найбільших та
-              найпопулярніших в Україні, який обслуговує тисячі клієнтів по всій
-              країні. Ми також співпрацюємо з багатьма еко-брендами,
-              організаціями та інфлюенсерами, які допомагають нам поширювати
-              наше послання.
+              On our website you can find interesting articles, webinars,
+              podcasts, quizzes and other materials that talk about
+              environmental problems, solutions and initiatives. You can also
+              join our community of eco-activists who share their experiences,
+              ideas and practices of eco-living. We believe that together we can
+              make the world a better place to live.
             </p>
             <h2 className="mt-8 text-3xl font-semibold text-green-600">
-              Наша команда
+              Our history
             </h2>
             <p className="mt-4 text-gray-700">
-              Наша команда - це група професіоналів, яким не байдуже майбутнє
-              нашої планети. Ми працюємо з любов'ю та захопленням, щоб
-              забезпечити вам найкращий сервіс, якість та ціну. Ми також
-              навчаємося та розвиваємося разом з вами, слухаючи ваші потреби,
-              побажання та відгуки. Ми вдячні вам за вашу підтримку та довіру.
+              Our store was founded in 2020 by two friends who dreamed of
+              creating a platform to promote eco-life in Ukraine. They started
+              with a small online store that offered only a few types of
+              eco-products, but over time they expanded their range and
+              audience. Today, our store is one of the largest and most popular
+              in Ukraine, which serves thousands of customers throughout the
+              country. We also partner with many eco-brands, organizations and
+              influencers who help us spread our message.
+            </p>
+            <h2 className="mt-8 text-3xl font-semibold text-green-600">
+              Our team
+            </h2>
+            <p className="mt-4 text-gray-700">
+              Our team is a group of professionals who care about the future of
+              our planet. We work with love and passion to provide you with the
+              best service, quality and value. We also learn and grow with you
+              by listening to your needs, wishes and feedback. We thank you for
+              your support and trust.
             </p>
             <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
               <div className="flex flex-col items-center">
@@ -77,8 +75,8 @@ const About = () => {
                   width={128}
                   height={128}
                 />
-                <h3 className="mt-4 text-xl font-medium text-gray-800">Анна</h3>
-                <p className="mt-2 text-sm text-gray-600">Засновниця та CEO</p>
+                <h3 className="mt-4 text-xl font-medium text-gray-800">Anna</h3>
+                <p className="mt-2 text-sm text-gray-600">Founder and CEO</p>
               </div>
               <div className="flex flex-col items-center">
                 <Image
@@ -88,8 +86,8 @@ const About = () => {
                   width={128}
                   height={128}
                 />
-                <h3 className="mt-4 text-xl font-medium text-gray-800">Іван</h3>
-                <p className="mt-2 text-sm text-gray-600">Засновник та CTO</p>
+                <h3 className="mt-4 text-xl font-medium text-gray-800">Ivan</h3>
+                <p className="mt-2 text-sm text-gray-600">Founder and CTO</p>
               </div>
               <div className="flex flex-col items-center">
                 <Image
@@ -100,9 +98,9 @@ const About = () => {
                   height={128}
                 />
                 <h3 className="mt-4 text-xl font-medium text-gray-800">
-                  Олена
+                  Olena
                 </h3>
-                <p className="mt-2 text-sm text-gray-600">Менеджер з продажу</p>
+                <p className="mt-2 text-sm text-gray-600">Sales manager</p>
               </div>
               <div className="flex flex-col items-center">
                 <Image
@@ -113,11 +111,9 @@ const About = () => {
                   height={128}
                 />
                 <h3 className="mt-4 text-xl font-medium text-gray-800">
-                  Петро
+                  Petro
                 </h3>
-                <p className="mt-2 text-sm text-gray-600">
-                  Менеджер з маркетингу
-                </p>
+                <p className="mt-2 text-sm text-gray-600">Marketing manager</p>
               </div>
             </div>
           </div>
