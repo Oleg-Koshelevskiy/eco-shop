@@ -15,7 +15,7 @@ const OrdersList = ({ userId }: UserId) => {
     useInfiniteQuery(
       ["query"],
       async ({ pageParam = 1 }) => await fetchItems(pageParam, userId),
-
+      // { refetchInterval: 100 },
       {
         getNextPageParam: (_, pages) => pages.length + 1,
       }
@@ -25,12 +25,12 @@ const OrdersList = ({ userId }: UserId) => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((e) => {
         fetchNextPage();
-        refetch();
       });
     });
     if (myRef.current) {
       observer.observe(myRef.current);
     }
+    refetch();
   }, [myRef]);
 
   // if (isFetchingNextPage)
