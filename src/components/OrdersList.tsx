@@ -11,18 +11,22 @@ import { useEffect, useRef } from "react";
 const OrdersList = ({ userId }: UserId) => {
   const myRef = useRef(null);
 
-  const { data, error, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
-    ["query"],
-    async ({ pageParam = 1 }) => await fetchItems(pageParam, userId),
+  const { data, error, fetchNextPage, isFetchingNextPage, refetch } =
+    useInfiniteQuery(
+      ["query"],
+      async ({ pageParam = 1 }) => await fetchItems(pageParam, userId),
 
-    {
-      getNextPageParam: (_, pages) => pages.length + 1,
-    }
-  );
+      {
+        getNextPageParam: (_, pages) => pages.length + 1,
+      }
+    );
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach((e) => fetchNextPage());
+      entries.forEach((e) => {
+        fetchNextPage();
+        refetch();
+      });
     });
     if (myRef.current) {
       observer.observe(myRef.current);
