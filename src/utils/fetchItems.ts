@@ -8,7 +8,7 @@ export const fetchItems = async (page: number, userId: string | null) => {
   );
   const rawData = await res.json();
   const data = rawData.reverse();
-  const orders = data.slice((page - 1) * 2, page * 2);
+  const orders = data.slice((page - 1) * 4, page * 4);
 
   return orders;
 };

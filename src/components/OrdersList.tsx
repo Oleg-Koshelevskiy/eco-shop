@@ -15,7 +15,6 @@ const OrdersList = ({ userId }: UserId) => {
     useInfiniteQuery(
       ["query"],
       async ({ pageParam = 1 }) => await fetchItems(pageParam, userId),
-      // { refetchInterval: 100 },
       {
         getNextPageParam: (_, pages) => pages.length + 1,
       }
