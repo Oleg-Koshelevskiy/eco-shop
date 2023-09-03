@@ -1,6 +1,8 @@
 import Order from "@/models/order";
 import { connectToDB } from "@/utils/database";
 
+export const revalidate = 5;
+
 export const GET = async () => {
   try {
     await connectToDB();
