@@ -34,7 +34,7 @@ export interface InputProps {
   placeholder?: string;
 }
 
-export interface Rating {
+export interface Mark {
   rating: number;
 }
 

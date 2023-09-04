@@ -1,9 +1,9 @@
-import { Rating } from "@/types";
+import { Mark } from "@/types";
 import RatingStar from "./RatingStar";
 
 let color: string;
 
-const Rating = ({ rating }: Rating) => {
+const Rating = ({ rating }: Mark) => {
   if (rating === 1) {
     color = "#f87171";
     return (

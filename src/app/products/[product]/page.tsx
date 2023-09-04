@@ -1,4 +1,5 @@
-import { OrderBlock, Rating } from "@/components";
+import { OrderBlock } from "@/components";
+import RatingBlock from "@/components/RatingBlock";
 import { Product } from "@/types";
 import { blurDataUrl } from "@/utils";
 import { getProducts } from "@/utils/database";
@@ -46,13 +47,13 @@ export default async function Page({
             />
           </div>
           <div className="md:basis-1/2 md:self-center">
+            <div className="text-xl font-bold text-slate-700">
+              {filteredProduct.category}
+            </div>
             <div className="flex justify-around align-middle items-center mb-4">
               <div>
                 <div className="text-sm font-bold text-slate-700">
-                  {filteredProduct.category}
-                </div>
-                <div className="text-sm font-bold text-slate-700">
-                  <Rating rating={filteredProduct.rating} />
+                  <RatingBlock rating={filteredProduct.rating} />
                 </div>
               </div>
               <div className="text-2xl font-bold text-slate-700">
