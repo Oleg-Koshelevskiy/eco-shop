@@ -1,7 +1,7 @@
-import { Mark } from "@/types";
+import { Rate } from "@/types";
 import RatingStar from "./RatingStar";
 
-const Rating = ({ rating }: Mark) => {
+const Rating = ({ rating }: Rate) => {
   const stars = [1, 2, 3, 4, 5];
 
   const starsList = stars.map((star, i) => {

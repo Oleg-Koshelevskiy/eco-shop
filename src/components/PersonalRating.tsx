@@ -21,13 +21,14 @@ const PersonalRating = () => {
     if (rate === 5 && i < 5) color = "#4ade80";
 
     return (
-      <div
+      <button
         className="hover:cursor-pointer hover:scale-110"
         key={i + 1}
         onClick={() => ratingHandler(i + 1)}
+        // disabled
       >
         <RatingStar color={color} />
-      </div>
+      </button>
     );
   });
 

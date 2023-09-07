@@ -1,5 +1,10 @@
 import { Schema, model, models } from "mongoose";
 
+const ProductsRatingSchema = new Schema({
+  productId: String,
+  rating: Number,
+});
+
 const UserSchema = new Schema({
   email: {
     type: String,
@@ -19,6 +24,9 @@ const UserSchema = new Schema({
   },
   isAdmin: {
     type: Boolean,
+  },
+  rating: {
+    type: [ProductsRatingSchema],
   },
 });
 
