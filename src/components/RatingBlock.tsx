@@ -3,6 +3,7 @@
 import { Mark } from "@/types";
 import Rating from "./Rating";
 import { useSession } from "next-auth/react";
+import PersonalRating from "./PersonalRating";
 
 const RatingBlock = ({ rating }: Mark) => {
   const { data: session } = useSession();
@@ -15,7 +16,7 @@ const RatingBlock = ({ rating }: Mark) => {
       {session?.user && (
         <div className="flex flex-col">
           <div>Personal:</div>
-          <Rating rating={rating} />
+          <PersonalRating />
         </div>
       )}
     </div>
