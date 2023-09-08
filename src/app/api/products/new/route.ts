@@ -13,6 +13,7 @@ export const POST = async (req: Request) => {
       photo,
       price,
       rating: 0,
+      votes: 0,
     });
 
     await newProduct.save();

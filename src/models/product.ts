@@ -21,6 +21,9 @@ const ProductSchema = new Schema({
   rating: {
     type: Number,
   },
+  votes: {
+    type: Number,
+  },
 });
 
 const Product = models.Product || model("Product", ProductSchema);

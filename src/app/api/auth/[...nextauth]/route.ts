@@ -33,6 +33,7 @@ const handler = NextAuth({
             username: profile?.name,
             image: profile?.picture,
             isAdmin: false,
+            rating: [],
           });
         }
 
