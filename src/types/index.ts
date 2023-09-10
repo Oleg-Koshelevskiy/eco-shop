@@ -36,7 +36,7 @@ export interface InputProps {
 
 export interface Mark {
   rating: number;
-  product: string;
+  productId: string;
 }
 
 export interface Rate {

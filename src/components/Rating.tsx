@@ -13,7 +13,7 @@ const Rating = ({ rating }: Rate) => {
     if (rating === 5 && i < 5) color = "#4ade80";
 
     return (
-      <div className="hover:cursor-pointer hover:scale-110">
+      <div key={star} className="hover:cursor-pointer hover:scale-110">
         <RatingStar color={color} />
       </div>
     );

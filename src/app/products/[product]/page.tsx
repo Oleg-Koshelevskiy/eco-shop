@@ -53,7 +53,10 @@ export default async function Page({
             <div className="flex justify-around align-middle items-center mb-4">
               <div>
                 <div className="text-sm font-bold text-slate-700">
-                  <RatingBlock rating={filteredProduct.rating} />
+                  <RatingBlock
+                    rating={filteredProduct.rating}
+                    productId={filteredProduct._id}
+                  />
                 </div>
               </div>
               <div className="text-2xl font-bold text-slate-700">
