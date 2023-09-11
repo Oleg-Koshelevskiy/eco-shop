@@ -31,15 +31,17 @@ const PersonalRating = ({ userEmail, productId }: RateParams) => {
       if (foundProduct.length === 0) setRate(0);
       else setRate(foundProduct[0].rating);
     };
-    const getProduct = async () => {
-      console.log(productId);
-      const response = await fetch(`/api/products/${productId}`);
-      const data = await response.json();
-      console.log(data);
-    };
     getStars();
-    getProduct();
   }, []);
+  // useEffect(() => {
+  //   const getProduct = async () => {
+  //     console.log(productId);
+  //     const response = await fetch(`/api/products/${productId}`);
+  //     const data = await response.json();
+  //     console.log(data);
+  //   };
+  //   getProduct();
+  // }, []);
 
   const stars = [1, 2, 3, 4, 5];
 
