@@ -32,16 +32,14 @@ const PersonalRating = ({ userEmail, productId }: RateParams) => {
       else setRate(foundProduct[0].rating);
     };
     getStars();
+    const getProduct = async () => {
+      console.log(productId);
+      const response = await fetch(`/api/products/${productId}`);
+      const data = await response.json();
+      console.log(data);
+    };
+    if (productId) getProduct();
   }, []);
-  // useEffect(() => {
-  //   const getProduct = async () => {
-  //     console.log(productId);
-  //     const response = await fetch(`/api/products/${productId}`);
-  //     const data = await response.json();
-  //     console.log(data);
-  //   };
-  //   getProduct();
-  // }, []);
 
   const stars = [1, 2, 3, 4, 5];
 

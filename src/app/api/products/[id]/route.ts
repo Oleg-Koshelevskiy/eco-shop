@@ -1,8 +1,11 @@
 import Product from "@/models/product";
 import { connectToDB } from "@/utils/database";
 
-export const GET = async ({ params }: { params: { product: string } }) => {
-  const productId = params.product;
+export const GET = async (
+  request: Request,
+  { params }: { params: { id: string } }
+) => {
+  const productId = params.id;
   console.log(params);
   try {
     await connectToDB();
