@@ -37,10 +37,12 @@ export interface InputProps {
 export interface Mark {
   rating: number;
   productId: string;
+  votes: number;
 }
 
 export interface Rate {
   rating: number;
+  votes: number;
 }
 
 export interface RatingStar {

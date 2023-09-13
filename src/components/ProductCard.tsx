@@ -36,7 +36,7 @@ const ProductCard = (props: Product) => {
               {props.category}
             </div>
             <div className="text-sm font-bold text-slate-700">
-              <Rating rating={props.rating} />
+              <Rating rating={props.rating} votes={0} />
             </div>
           </div>
           <div className="text-2xl font-bold text-slate-700">

@@ -5,6 +5,8 @@ import RatingStar from "./RatingStar";
 interface RateParams {
   userEmail: string;
   productId: string;
+  rating: number;
+  votes: number;
 }
 
 interface Rating {
@@ -14,8 +16,13 @@ interface Rating {
 
 let ratingList: [] | Rating[] = [];
 
-const PersonalRating = ({ userEmail, productId }: RateParams) => {
-  const [rate, setRate] = useState(0);
+const PersonalRating = ({
+  userEmail,
+  productId,
+  rating,
+  votes,
+}: RateParams) => {
+  const [personalRate, setPersonalRate] = useState(0);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -28,8 +35,8 @@ const PersonalRating = ({ userEmail, productId }: RateParams) => {
         (item: Rating) => item.productId === productId
       );
 
-      if (foundProduct.length === 0) setRate(0);
-      else setRate(foundProduct[0].rating);
+      if (foundProduct.length === 0) setPersonalRate(0);
+      else setPersonalRate(foundProduct[0].rating);
     };
     getStars();
     const getProduct = async () => {
@@ -39,15 +46,28 @@ const PersonalRating = ({ userEmail, productId }: RateParams) => {
       console.log(data);
     };
     if (productId) getProduct();
-  }, []);
+  }, [rating]);
 
   const stars = [1, 2, 3, 4, 5];
 
   const ratingHandler = async (mark: number) => {
+    let ratingFields;
     setLoading(true);
     const filteredRating = ratingList.filter(
       (item: Rating) => item.productId !== productId
     );
+
+    if (personalRate)
+      ratingFields = {
+        rating: Math.round((rating - personalRate + mark) / votes),
+        votes: votes,
+      };
+    else
+      ratingFields = {
+        rating: Math.round((rating + mark) / votes + 1),
+        votes: votes + 1,
+      };
+
     console.log(filteredRating);
     try {
       await fetch(`/api/users/?email=${userEmail}`, {
@@ -59,18 +79,27 @@ const PersonalRating = ({ userEmail, productId }: RateParams) => {
     } catch (error) {
       console.log(error);
     }
+    console.log(ratingFields);
+    try {
+      await fetch(`/api/products/${productId}`, {
+        method: "PATCH",
+        body: JSON.stringify(ratingFields),
+      });
+    } catch (error) {
+      console.log(error);
+    }
     setLoading(false);
-    setRate(mark);
+    setPersonalRate(mark);
   };
-  console.log(rate);
+  console.log(personalRate);
 
   const starsList = stars.map((star, i) => {
     let color: string = "";
-    if (rate === 1 && i === 0) color = "#f87171";
-    if (rate === 2 && i < 2) color = "#fb923c";
-    if (rate === 3 && i < 3) color = "#facc15";
-    if (rate === 4 && i < 4) color = "#a3e635";
-    if (rate === 5 && i < 5) color = "#4ade80";
+    if (personalRate === 1 && i === 0) color = "#f87171";
+    if (personalRate === 2 && i < 2) color = "#fb923c";
+    if (personalRate === 3 && i < 3) color = "#facc15";
+    if (personalRate === 4 && i < 4) color = "#a3e635";
+    if (personalRate === 5 && i < 5) color = "#4ade80";
 
     return (
       <button

@@ -1,7 +1,7 @@
 import { Rate } from "@/types";
 import RatingStar from "./RatingStar";
 
-const Rating = ({ rating }: Rate) => {
+const Rating = ({ rating, votes }: Rate) => {
   const stars = [1, 2, 3, 4, 5];
 
   const starsList = stars.map((star, i) => {
@@ -19,7 +19,12 @@ const Rating = ({ rating }: Rate) => {
     );
   });
 
-  return <div className="flex">{starsList}</div>;
+  return (
+    <div className="flex gap-1">
+      <div className="flex">{starsList}</div>
+      {votes !== 0 && <div>Votes: {votes}</div>}
+    </div>
+  );
 };
 
 export default Rating;

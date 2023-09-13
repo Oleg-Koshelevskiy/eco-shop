@@ -5,13 +5,13 @@ import Rating from "./Rating";
 import { useSession } from "next-auth/react";
 import PersonalRating from "./PersonalRating";
 
-const RatingBlock = ({ rating, productId }: Mark) => {
+const RatingBlock = ({ rating, productId, votes }: Mark) => {
   const { data: session, status } = useSession();
   return (
     <div>
       <div className="flex flex-col">
         <div>Average:</div>
-        <Rating rating={rating} />
+        <Rating rating={rating} votes={votes} />
       </div>
       {status === "authenticated" && (
         <div className="flex flex-col">
@@ -19,6 +19,8 @@ const RatingBlock = ({ rating, productId }: Mark) => {
           <PersonalRating
             userEmail={session.user.email}
             productId={productId}
+            votes={votes}
+            rating={rating}
           />
         </div>
       )}
