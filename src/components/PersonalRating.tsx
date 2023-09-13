@@ -29,7 +29,7 @@ const PersonalRating = ({
     const getStars = async () => {
       const response = await fetch(`/api/users/?email=${userEmail}`);
       const data = await response.json();
-      // console.log(data);
+
       ratingList = data[0]?.rating;
       const foundProduct = data[0]?.rating.filter(
         (item: Rating) => item.productId === productId
@@ -40,7 +40,6 @@ const PersonalRating = ({
     };
     getStars();
     const getProduct = async () => {
-      console.log(productId);
       const response = await fetch(`/api/products/${productId}`);
       const data = await response.json();
       console.log(data);
@@ -56,8 +55,8 @@ const PersonalRating = ({
     const filteredRating = ratingList.filter(
       (item: Rating) => item.productId !== productId
     );
-
-    if (personalRate)
+    console.log(personalRate);
+    if (personalRate && personalRate !== 0)
       ratingFields = {
         rating: Math.round((rating - personalRate + mark) / votes),
         votes: votes,
