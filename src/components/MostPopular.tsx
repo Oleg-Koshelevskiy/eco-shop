@@ -10,8 +10,9 @@ const MostPopular = async () => {
       <h2 className="text-center secondary_header">Most Popular</h2>
       <div className="flex flex-wrap snap-x">
         {product_list
-          .filter((p: Product) => p.rating === 5)
+          .filter((p: Product) => p.rating >= 4.5)
           .filter((p: Product, i: number) => i <= 3)
+          .sort((a: Product, b: Product) => b.rating - a.rating)
           .map((product: Product) => (
             <ProductCard
               key={product._id}

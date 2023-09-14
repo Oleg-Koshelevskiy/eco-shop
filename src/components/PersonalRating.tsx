@@ -58,13 +58,13 @@ const PersonalRating = ({
     console.log(personalRate);
     if (personalRate !== 0) {
       ratingFields = {
-        rating: Math.round((rating - personalRate + mark) / votes),
+        rating: (votes * rating - personalRate + mark) / votes,
         votes: votes,
       };
     } else {
       console.log(rating, mark, votes);
       ratingFields = {
-        rating: Math.round((rating + mark) / (votes + 1)),
+        rating: (votes * rating + mark) / (votes + 1),
         votes: votes + 1,
       };
     }
