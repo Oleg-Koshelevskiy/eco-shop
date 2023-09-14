@@ -45,7 +45,7 @@ const PersonalRating = ({
       console.log(data);
     };
     if (productId) getProduct();
-  }, [rating]);
+  }, []);
 
   const stars = [1, 2, 3, 4, 5];
 
@@ -56,16 +56,18 @@ const PersonalRating = ({
       (item: Rating) => item.productId !== productId
     );
     console.log(personalRate);
-    if (personalRate && personalRate !== 0)
+    if (personalRate !== 0) {
       ratingFields = {
         rating: Math.round((rating - personalRate + mark) / votes),
         votes: votes,
       };
-    else
+    } else {
+      console.log(rating, mark, votes);
       ratingFields = {
-        rating: Math.round((rating + mark) / votes + 1),
+        rating: Math.round((rating + mark) / (votes + 1)),
         votes: votes + 1,
       };
+    }
 
     console.log(filteredRating);
     try {
