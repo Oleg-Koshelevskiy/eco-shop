@@ -61,6 +61,11 @@ const PersonalRating = ({
         rating: (votes * rating - personalRate + mark) / votes,
         votes: votes,
       };
+    } else if (votes === 0) {
+      ratingFields = {
+        rating: mark,
+        votes: 1,
+      };
     } else {
       console.log(rating, mark, votes);
       ratingFields = {
