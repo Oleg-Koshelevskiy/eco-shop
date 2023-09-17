@@ -44,15 +44,15 @@ const RatingBlock = ({ productId }: Mark) => {
         } else setPersonalRate(foundProduct[0].rating);
       };
       getStars();
-      const getProduct = async () => {
-        const response = await fetch(`/api/products/${productId}`);
-        const data = await response.json();
-        setRating(data.rating);
-        setVotes(data.votes);
-      };
-      if (productId) getProduct();
-      setLoading(false);
     }
+    const getProduct = async () => {
+      const response = await fetch(`/api/products/${productId}`);
+      const data = await response.json();
+      setRating(data.rating);
+      setVotes(data.votes);
+    };
+    if (productId) getProduct();
+    setLoading(false);
   }, [personalRate, status]);
 
   const ratingHandler = async (mark: number) => {
