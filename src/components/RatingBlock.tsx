@@ -26,32 +26,34 @@ const RatingBlock = ({ productId }: Mark) => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    console.log("rerender");
     setLoading(true);
-    const getStars = async () => {
-      const response = await fetch(`/api/users/?email=${session?.user.email}`);
-      const data = await response.json();
+    if (status === "authenticated") {
+      const getStars = async () => {
+        const response = await fetch(
+          `/api/users/?email=${session?.user.email}`
+        );
+        const data = await response.json();
 
-      ratingList = data[0]?.rating;
-      const foundProduct = data[0]?.rating.filter(
-        (item: Rating) => item.productId === productId
-      );
+        ratingList = data[0]?.rating;
+        const foundProduct = data[0]?.rating.filter(
+          (item: Rating) => item.productId === productId
+        );
 
-      if (foundProduct.length === 0) {
-        setPersonalRate(0);
-      } else setPersonalRate(foundProduct[0].rating);
-    };
-    getStars();
-    const getProduct = async () => {
-      const response = await fetch(`/api/products/${productId}`);
-      const data = await response.json();
-      console.log(data);
-      setRating(data.rating);
-      setVotes(data.votes);
-    };
-    if (productId) getProduct();
-    setTimeout(() => setLoading(false), 1500);
-  }, [personalRate]);
+        if (foundProduct?.length === 0) {
+          setPersonalRate(0);
+        } else setPersonalRate(foundProduct[0].rating);
+      };
+      getStars();
+      const getProduct = async () => {
+        const response = await fetch(`/api/products/${productId}`);
+        const data = await response.json();
+        setRating(data.rating);
+        setVotes(data.votes);
+      };
+      if (productId) getProduct();
+      setLoading(false);
+    }
+  }, [personalRate, status]);
 
   const ratingHandler = async (mark: number) => {
     setLoading(true);
@@ -59,7 +61,7 @@ const RatingBlock = ({ productId }: Mark) => {
     const filteredRating = ratingList.filter(
       (item: Rating) => item.productId !== productId
     );
-    console.log(personalRate, votes);
+
     if (votes === 0 && personalRate === 0) {
       ratingFields = {
         rating: mark,
@@ -71,14 +73,11 @@ const RatingBlock = ({ productId }: Mark) => {
         votes: votes + 1,
       };
     } else {
-      console.log(rating, mark, votes);
       ratingFields = {
         rating: (votes * rating - personalRate + mark) / votes,
         votes: votes,
       };
     }
-
-    console.log(filteredRating);
     try {
       await fetch(`/api/users/?email=${session?.user.email}`, {
         method: "PATCH",
@@ -99,7 +98,7 @@ const RatingBlock = ({ productId }: Mark) => {
       console.log(error);
     }
     setPersonalRate(mark);
-    setTimeout(() => setLoading(false), 1500);
+    setLoading(false);
   };
 
   return (

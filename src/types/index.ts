@@ -73,6 +73,7 @@ export interface Order {
     userName: string | undefined;
     userEmail: string | undefined;
     date: Date;
+    status: string | undefined;
     products: CartItems;
   };
 }

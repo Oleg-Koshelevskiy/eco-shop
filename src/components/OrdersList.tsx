@@ -32,8 +32,6 @@ const OrdersList = ({ userId }: UserId) => {
     refetch();
   }, [myRef]);
 
-  // if (isFetchingNextPage)
-  //   return <div className="flex justify-center">Loading...</div>;
   if (error) return <div className="flex justify-center">Failed to load!</div>;
 
   return (
@@ -98,17 +96,6 @@ const OrdersList = ({ userId }: UserId) => {
 
       <div ref={myRef}></div>
       {isFetchingNextPage && <div className="secondary_header">Loading...</div>}
-      {/* <button
-        onClick={() => fetchNextPage()}
-        disabled={isFetchingNextPage}
-        className="secondary_btn flex mx-auto"
-      >
-        {isFetchingNextPage
-          ? "Loading more..."
-          : (data?.pages.length ?? 0) < 3
-          ? "Load more"
-          : "Nothing more to load"}
-      </button> */}
     </div>
   );
 };

@@ -64,6 +64,7 @@ const CartProductList = () => {
       userName: session?.user.name,
       userEmail: session?.user.email,
       date: new Date(),
+      status: "processing",
       products: orderedProducts,
     });
 

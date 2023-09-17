@@ -21,6 +21,9 @@ const OrderSchema = new Schema({
   date: {
     type: Date,
   },
+  status: {
+    type: String,
+  },
   products: {
     type: [OrderedItemSchema],
   },

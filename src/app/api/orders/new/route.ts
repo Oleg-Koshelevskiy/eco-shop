@@ -2,7 +2,8 @@ import Order from "@/models/order";
 import { connectToDB } from "@/utils/database";
 
 export const POST = async (req: any) => {
-  const { userId, userName, userEmail, date, products } = await req.json();
+  const { userId, userName, userEmail, date, status, products } =
+    await req.json();
 
   try {
     await connectToDB();
@@ -11,6 +12,7 @@ export const POST = async (req: any) => {
       userName,
       userEmail,
       date,
+      status,
       products,
     });
 

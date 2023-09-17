@@ -8,12 +8,12 @@ import { useCartStore } from "@/context/cartStore";
 
 const OrderForm = (props: OrderItem) => {
   const [value, setValue] = useState("1");
-  // const context = useContext(CartContext);
+
   const addtoCart = useCartStore((state) => state.changeCart);
 
   const addItemHandler = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    // context.addToCart(props.id, +value);
+
     addtoCart(props.id, +value);
   };
 
