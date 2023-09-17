@@ -4,9 +4,104 @@ import { Mark } from "@/types";
 import Rating from "./Rating";
 import { useSession } from "next-auth/react";
 import PersonalRating from "./PersonalRating";
+import { useEffect, useState } from "react";
 
-const RatingBlock = ({ rating, productId, votes }: Mark) => {
+// interface RateParams {
+//   userEmail: string;
+//   productId: string;
+// }
+
+interface Rating {
+  productId: string;
+  rating: number;
+}
+
+let ratingList: [] | Rating[] = [];
+
+const RatingBlock = ({ productId }: Mark) => {
   const { data: session, status } = useSession();
+  const [personalRate, setPersonalRate] = useState(0);
+  const [rating, setRating] = useState(0);
+  const [votes, setVotes] = useState(0);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    console.log("rerender");
+    setLoading(true);
+    const getStars = async () => {
+      const response = await fetch(`/api/users/?email=${session?.user.email}`);
+      const data = await response.json();
+
+      ratingList = data[0]?.rating;
+      const foundProduct = data[0]?.rating.filter(
+        (item: Rating) => item.productId === productId
+      );
+
+      if (foundProduct.length === 0) {
+        setPersonalRate(0);
+      } else setPersonalRate(foundProduct[0].rating);
+    };
+    getStars();
+    const getProduct = async () => {
+      const response = await fetch(`/api/products/${productId}`);
+      const data = await response.json();
+      console.log(data);
+      setRating(data.rating);
+      setVotes(data.votes);
+    };
+    if (productId) getProduct();
+    setTimeout(() => setLoading(false), 1500);
+  }, [personalRate]);
+
+  const ratingHandler = async (mark: number) => {
+    setLoading(true);
+    let ratingFields;
+    const filteredRating = ratingList.filter(
+      (item: Rating) => item.productId !== productId
+    );
+    console.log(personalRate, votes);
+    if (votes === 0 && personalRate === 0) {
+      ratingFields = {
+        rating: mark,
+        votes: 1,
+      };
+    } else if (votes !== 0 && personalRate === 0) {
+      ratingFields = {
+        rating: (votes * rating + mark) / (votes + 1),
+        votes: votes + 1,
+      };
+    } else {
+      console.log(rating, mark, votes);
+      ratingFields = {
+        rating: (votes * rating - personalRate + mark) / votes,
+        votes: votes,
+      };
+    }
+
+    console.log(filteredRating);
+    try {
+      await fetch(`/api/users/?email=${session?.user.email}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          rating: [...filteredRating, { productId: productId, rating: mark }],
+        }),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    console.log(ratingFields);
+    try {
+      await fetch(`/api/products/${productId}`, {
+        method: "PATCH",
+        body: JSON.stringify(ratingFields),
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    setPersonalRate(mark);
+    setTimeout(() => setLoading(false), 1500);
+  };
+
   return (
     <div>
       <div className="flex flex-col">
@@ -17,10 +112,9 @@ const RatingBlock = ({ rating, productId, votes }: Mark) => {
         <div className="flex flex-col">
           <div>Personal:</div>
           <PersonalRating
-            userEmail={session.user.email}
-            productId={productId}
-            votes={votes}
-            rating={rating}
+            personalRate={personalRate}
+            loading={loading}
+            ratingHandler={ratingHandler}
           />
         </div>
       )}
