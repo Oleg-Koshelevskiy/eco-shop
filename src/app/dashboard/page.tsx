@@ -77,9 +77,9 @@ const Dashboard = () => {
   return (
     <section className="mt-14 sm:mt-18 md:mt-20 container max-w-7xl mx-auto">
       <h1 className="secondary_header">Admin dashboard</h1>
-      <div className="flex justify-around">
-        <div className="basis-1/2">
-          <div className="flex justify-center my-2">
+      <div className="flex flex-col md:flex-row gap-2 justify-around text-sm md:text-base">
+        <div className="md:basis-1/2 mx-2">
+          <div className="flex justify-center my-2 mx-2">
             <Button
               onClick={showFormHandler}
               type="button"
@@ -98,7 +98,7 @@ const Dashboard = () => {
             />
           )}
         </div>
-        <div className="basis-1/2">
+        <div className=" md:basis-1/2">
           <div className="flex justify-center my-2">
             <Button
               onClick={showOrdersHandler}
